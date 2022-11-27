@@ -19,7 +19,7 @@ p {
 header{
     background-color: rgb(6,11,21);
     padding: 20px 0px 20px 0px;
-    margin-bottom: 10px;
+    border-bottom: 1px dashed rgb(169,135,84);
 }
 
 .logo{
@@ -36,7 +36,7 @@ img#diagon{
 }
 
 body {
-    background-color: black;
+    background-image: url(../img/starbg.gif);
 }
 
 .seleccion{
@@ -46,7 +46,7 @@ body {
     color: white;
     position: relative;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
 }
 
 .seleccion div {
@@ -56,7 +56,6 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    padding: 40px 0px 40px 0px;
 }
 
 .seleccion img {
@@ -80,7 +79,7 @@ body {
 .material{
     padding-bottom: 20px;
     margin-bottom: 20px;
-    background-color: rgb(0,2,10);
+    background-color: rgba(0, 2, 10, 0.514);
 }
 
 .subLogo {
@@ -183,7 +182,6 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: rgba(41, 16, 36, 0.555);
-    gap: 5px;
     padding: 20px 0px;
     margin-bottom: 20px;
 }
@@ -192,18 +190,60 @@ button {
     font-family:'Crimson Text', serif;
     font-size: 15px;
     background-color: rgb(169,135,84);
-    color: white;
-    border-radius: 0.5rem;
     border: none;
-    box-shadow: 0 0 5px 1px rgb(41,16,36);
+    color: white;
     padding: 10px;
 }
 
+button:active {
+    transform: scale(1.1);
+}
+
 button.quitar {
-    box-shadow: none;
+    border-radius: 0.5rem;
     padding: 0px;
     width: 30px;
     height: 30px;
+}
+
+button.diseñar {
+    border-radius: 50%;
+}
+
+button.diseñar img, button.botonCanasta img{
+    height: 100px;
+    border-radius: 50%;
+}
+
+button.botonCanasta {
+    border-radius: 50%;
+    background-color: rgb(169,135,84);
+    padding: 10px;
+}
+
+button.btn-addcanasta {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0px;
+    height: 90px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-addcanasta img{
+    height: 70px;
+    position: relative;
+}
+
+.btn-addcanasta p {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-weight: bold;    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 footer{
@@ -239,11 +279,10 @@ footer p{
 }
 
 .alertas {
-    display: flex;
-    flex-direction: row;
     color: rgb(169,135,84);
     border-radius: 0.5rem;
     border: 1px solid rgb(169,135,84);
+    margin: 20px 10px;
     padding: 10px;
 }
 
@@ -293,5 +332,15 @@ td.del{
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .wandValue {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .alertas {
+        margin: 0px 20px;
     }
 }

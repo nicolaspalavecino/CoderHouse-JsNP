@@ -77,17 +77,24 @@ let cargarDatos = (madera, nucleo)=> {
 let presupuesto = ()=> {
     let wand = new Varita(cargarMadera().value, cargarNucleo().value, valorFijo)
         finVarita.innerHTML =             
-        `<p>El valor de su varita de <span class="resalt">${cargarMadera().id}</span> y <span class="resalt">${cargarNucleo().id}</span> es: </p>
-        <p>$${wand.prVarita()}</span></p>`
+        `<div class="alertas">
+            <p>El valor de su varita de <span class="resalt">${cargarMadera().id}</span> y <span class="resalt">${cargarNucleo().id}</span> es: </p>
+            <p class="resalt">$${wand.prVarita()}</span></p>
+        </div>`
         alertSeleccion.innerHTML = ""
-        // addVarita.classList.remove("ocultar")
 }
 
 // Presupuesto Varita ("Diseñar varita")
 let presupuestoVarita = ()=> {
     if (cargarDatos(cargarMadera().value, cargarNucleo().value)){
         presupuesto()
-        agregar.innerHTML = '<button id="addVarita">Agregar a Canasta</button>'
+        agregar.innerHTML = 
+        `<button class="btn-addcanasta" id="addVarita">
+            <div>
+                <img src="./img/Botones/btnbg.png">
+                <p>+ CANASTA</p>
+            </div> 
+        </button>`
         let addwand = document.getElementById("addVarita")
         addwand.addEventListener("click", plusVarita)
     } else {
