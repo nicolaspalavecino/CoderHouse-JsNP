@@ -9,14 +9,12 @@ let showCards = (contenido, array)=> {
             `<label>
             <input type="radio" name="${elemento.grupo}" value="${elemento.valor}" id="${elemento.nombre}" class="inn" />
             <div class="tarjeta" id="tarjeta${elemento.id}">
-                <div class="componente">
+                <div>
                     <img src="${elemento.imagen}">
                 </div>
                 <h4>${elemento.nombre}</h4>
                 <p class="costo">$${elemento.valor}</p>
-                <div class="desc">
-                    <p class="descripcion">${elemento.descript}</p>
-                </div>
+                <p class="descripcion">${elemento.descript}</p>
             </div>
             </label>`
             }

@@ -1,0 +1,97 @@
+.material{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background-color: $hpdarker;
+}
+
+.subLogo {
+    display: flex;
+    border-bottom: 1px solid $hpdorado;
+    border-top: 1px solid $hpdorado;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(6,11,21);
+    padding: 10px;
+    margin-bottom: 10px;
+    img {
+        width: 75px;
+        margin-right: 10px;
+    }
+    h3 {
+        font-family: 'Libre Baskerville', serif;
+        color:white;
+        margin: 0px;
+    }
+}
+
+.contenedor{
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tarjeta{
+    box-shadow: 0 0 5px 1px #484e4a69;
+    width: 275px;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $hpdorado;
+    color: $hpdorado;
+    border-radius: 1rem;
+    padding: 10px 10px 0px 10px;
+    div{
+        width: 150px;
+        height: 150px;
+        border-radius: 1rem;
+        overflow: hidden;
+        margin-bottom: 10px;
+        img{
+            width: 100%;
+            height: 100%;    
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    h4{
+        font-family: 'Crimson Text', serif;
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+    .descripcion{
+        color: white;
+        text-align: center;
+        font-size: 12.5px;
+        font-weight: lighter;
+        padding: 5px 5px 10px 5px;
+    }
+}
+
+.inn {
+    display: none;
+}
+
+.inn:checked + .tarjeta {
+    box-shadow: 0 0 8px 1px #484e4a;
+    background-color: rgb(6,11,21);
+}
+
+.inn:checked + .tarjeta h4, .inn:checked + .tarjeta p.costo {
+    color: white;
+}
+
+.tarjeta:hover, button:hover{
+    cursor: pointer;
+}
+
+@media (min-width: 768px){
+    .contenedor{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+

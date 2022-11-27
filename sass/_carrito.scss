@@ -1,0 +1,36 @@
+.canasta {
+    text-align: center;
+    padding: 10px 0px;
+    margin-bottom: 20px;
+}
+
+.carritos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table{
+    width: 98%;
+    background-color: black;
+    color: white;
+    margin: 10px 0;
+    th {
+        background-color: rgb(6,11,21);
+        text-align: center;
+        padding: 5px;
+    }
+    td {
+        background-color: white;
+        color: black;
+        padding: 5px 2px;
+    }
+    td.del{
+        text-align: center;
+    }
+}
+
+
+
+
+

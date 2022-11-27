@@ -1,0 +1,59 @@
+button {
+    font-family:'Crimson Text', serif;
+    font-size: 15px;
+    background-color: rgb(169,135,84);
+    border: none;
+    color: white;
+    padding: 10px;
+}
+
+button:active {
+    transform: scale(1.1);
+}
+
+button.quitar {
+    border-radius: 0.5rem;
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+}
+
+button.diseñar {
+    border-radius: 50%;
+}
+
+button.diseñar img, button.botonCanasta img{
+    height: 100px;
+    border-radius: 50%;
+}
+
+button.botonCanasta {
+    border-radius: 50%;
+    background-color: rgb(169,135,84);
+    padding: 10px;
+}
+
+button.btn-addcanasta {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0px;
+    height: 90px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-addcanasta img{
+    height: 70px;
+    position: relative;
+}
+
+.btn-addcanasta p {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-weight: bold;    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
