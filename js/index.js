@@ -88,6 +88,16 @@ let presupuesto = ()=> {
         alertSeleccion.innerHTML = ""
 }
 
+// Añadir producto al carrito // Movido hacia arriba (antes estaba abajo)
+let plusVarita = ()=> {
+    let valorFinal = (parseInt(cargarMadera().value)+(parseInt(cargarNucleo().value)))*valorFijo
+    let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal)
+    canastaDiagon.push(dvarita)
+    localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
+    canastaHTML()
+    alertaCanasta(cargarMadera().id, cargarNucleo().id)
+}
+
 // Presupuesto Varita ("Diseñar varita") // Función gatillada por BtnVarita
 let presupuestoVarita = ()=> {
     if (cargarDatos(cargarMadera().value, cargarNucleo().value)){
@@ -156,15 +166,7 @@ let canastaHTML = ()=> {
 } 
 canastaHTML() // Ejecutando esta función se recupera lo del localStorage y se muestra en la tabla al recargar la página.
 
-// Añadir producto al carrito
-let plusVarita = ()=> {
-    let valorFinal = (parseInt(cargarMadera().value)+(parseInt(cargarNucleo().value)))*valorFijo
-    let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal)
-    canastaDiagon.push(dvarita)
-    localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
-    canastaHTML()
-    alertaCanasta(cargarMadera().id, cargarNucleo().id)
-}
+
 
 // Alerta de adición del producto al carrito
 let alertaCanasta = (cmadera, cnucleo)=> {
