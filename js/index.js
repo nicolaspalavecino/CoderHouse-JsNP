@@ -7,13 +7,13 @@ const valorVarita = document.querySelector("#valorVarita")
 const nameMadera = document.querySelector("#nameMadera")
 const nameNucleo = document.querySelector("#nameNucleo")
 const finVarita = document.querySelector("div.finVarita")
+
 // Interacción con Botón
 const btnVarita = document.querySelector("#btn-varita")
 
 // Canasta
 const agregar = document.getElementById("agregar")
 const canastaDiagon = []
-const btnDelete = []
 const totalCanasta = document.getElementById("totalCanasta")
 
 // Carga de Cards en Materiales
@@ -43,7 +43,7 @@ showCards(containerNucleo, nucleos)
 let cargarMadera = ()=> {
     const selectMadera = document.querySelector('input[name="wood"]:checked')
         if (selectMadera == null){
-            return alert("Usted no ha seleccionado un tipo de Madera del catálogo.")            
+            return alert("Usted no ha seleccionado un tipo de Madera del catálogo.")
         } else if (selectMadera !== null){
             return selectMadera
         }
@@ -52,7 +52,7 @@ let cargarMadera = ()=> {
 let cargarNucleo = ()=> {
     const selectNucleo = document.querySelector('input[name="nucleus"]:checked')
         if (selectNucleo == null){
-            return alert("Usted no ha seleccionado un tipo de Núcleo del catálogo.")            
+            return alert("Usted no ha seleccionado un tipo de Núcleo del catálogo.")
         } else if (selectNucleo !== null){
             return selectNucleo
         }
@@ -62,7 +62,7 @@ let cargarNucleo = ()=> {
 const alertSeleccion = document.getElementById('alertSeleccion')
 
 const alert = (message) => {
-    alertSeleccion.innerHTML = 
+    alertSeleccion.innerHTML =
             `<div class="alertas">
                <div>${message}</div>
             </div>`
@@ -80,7 +80,7 @@ let cargarDatos = (madera, nucleo)=> {
 // Instanciar Cotización de Varita
 let presupuesto = ()=> {
     let wand = new Varita(cargarMadera().value, cargarNucleo().value, valorFijo)
-        finVarita.innerHTML =             
+        finVarita.innerHTML =
         `<div class="alertas">
             <p>El valor de su varita de <span class="resalt">${cargarMadera().id}</span> y <span class="resalt">${cargarNucleo().id}</span> es: </p>
             <p class="resalt">$${wand.prVarita()}</span></p>
@@ -92,12 +92,12 @@ let presupuesto = ()=> {
 let presupuestoVarita = ()=> {
     if (cargarDatos(cargarMadera().value, cargarNucleo().value)){
         presupuesto()
-        agregar.innerHTML = 
+        agregar.innerHTML =
         `<button class="btn-addcanasta" id="addVarita">
             <div>
                 <img src="./img/Botones/btnbg.png">
                 <p>+ CANASTA</p>
-            </div> 
+            </div>
         </button>`
         let addwand = document.getElementById("addVarita")
         addwand.addEventListener("click", plusVarita)
@@ -106,14 +106,6 @@ let presupuestoVarita = ()=> {
     }
 }
 btnVarita.addEventListener("click", presupuestoVarita)
-
-// let recuperarCanasta = ()=> {
-//     if (canastaDiagon === null) {
-//         localStorage.setItem("Canasta-Diagon", "")        
-//         canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
-//     }
-// }
-// recuperarCanasta()
 
 // Añadir producto al carrito // Movido hacia arriba (antes estaba abajo )
 let plusVarita = ()=> {
@@ -137,7 +129,7 @@ let alertaCanasta = (cmadera, cnucleo)=> {
         showConfirmButton: false,
         background: '#291024',
         timer: 1500
-      })   
+      })
 }
 
 // Suma del Total del Carrito
@@ -146,7 +138,7 @@ let sumaCanasta = ()=> {
     let sumaTotal = 0
     if (canastaDiagon.length > 0) {
         canastaDiagon.forEach(v => {
-            sumaTotal += v.dvalor 
+            sumaTotal += v.dvalor
         })
     return sumaTotal
     }
@@ -161,93 +153,14 @@ let canastaHTML = ()=> {
         canastaDiagon.forEach(v => {
             tablaHTML +=
             `<tr>
-                <td>Varita de ${v.dmadera} y ${v.dnucleo} </td>
+                <td>Varita de ${v.dmadera} y ${v.dnucleo}</td>
                 <td>$${v.dvalor}</td>
-                <td class="del"><button class="quitar quitar2" id="${v.dmadera}-${v.dnucleo}"> X </button></td>
-            </tr>`   
+                <td class="del"><button class="quitar quitar2" id="${v.dmadera}${v.dnucleo}"> X </button></td>
+            </tr>`
         })
         tbody.innerHTML = tablaHTML
-        // let btneliminar = document.querySelectorAll("button.quitar.quitar2")
-        // console.table(btneliminar)
-        // btneliminar.forEach(btn => {
-        //     btn.addEventListener("click", deleteCanasta)
-        //     let btnx = btnDelete.some(x => x.id === btn.id)
-        //     if (btnx === false){
-        //         btnDelete.push(btn)
-        //     }
-        // })
-    totalCanasta.innerHTML = `<p>Total a pagar: $${sumaCanasta()}</p>`
+        totalCanasta.innerHTML = `<p>Total a pagar: $${sumaCanasta()}</p>`
     }
-} 
+}
 canastaHTML() // Ejecutando esta función se recupera lo del localStorage y se muestra en la tabla al recargar la página.
 
-
-// ELIMINAR DEL CARRITO
-const btneliminar = document.querySelectorAll('button.quitar.quitar2') //Al crearse se agrega al localStorage pero al verlo en la consola no muestra el array actualizado. Solamente se ve cuando se recarga la página.
-
-
-// console.table(btneliminar)
-// btneliminar.forEach(btn => {
-//     btn.addEventListener("click", deleteCanasta)
-//     let btnx = btnDelete.some(x => x.id === btn.id)
-//     if (btnx === false){
-//         btnDelete.push(btn)
-//     }
-// })
-
-// let deleteCanasta = ()=> {
-//     btnDelete.forEach(btn => { 
-//         btn.addEventListener("click", ()=> {
-//             // let indicex = canastaDiagon.findIndex((y)=> y.id === btn.id) // Asignarle al indicex el valor del index del y cuyo id coincida con eliminado.
-//             // canastaDiagon.splice(indicex,1)
-//         console.log(btn.id)
-//         })
-//     })
-// }
-
-
-// EJEMPLO DE LA CLASE
-// function activarClickBotones() {
-//     botonesAdd.forEach(btn => {
-//         btn.addEventListener("click", ()=> {
-//             let resultado = productos.find(prod => prod.id === parseInt(btn.id))
-//                 carrito.push(resultado)
-//                 localStorage.setItem("miCarrito", JSON.stringify(carrito))
-//         })
-//     })
-// }
-// activarClickBotones()
-
-// function activarClickBotones() {
-//     const buttonsDelete = document.querySelectorAll("button.button-add")
-//     buttonsDelete.forEach(btn => {
-//         btn.addEventListener("click", ()=> {
-//             //buscar usando button.id el producto en el array carrito.
-//             //hay que utilizar findIndex() porque necesitamos el índice del producto
-//             //luego con el método splice(), elimino el índice recuperado del carrito.
-//             //debemos declarar carrito de forma GLOBAL.
-//         })
-//     })
-// }
-
-
-// let addwand = document.getElementById("addVarita")
-// addwand.addEventListener("click", plusVarita) // plusVarita() -> Ejecuta directamente la función (???)
-
-// Ingresar Producto al Carrito del HTML
-// let tablaCarrito = (v)=> {
-// return      `<tr>
-//                 <td>Varita de ${v.dmadera} y ${v.dnucleo} </td>
-//                 <td>$${v.dvalor}</td>
-//                 <td><button class="quitar" id="${v.dmadera}-${v.dnucleo}"> X </button></td>
-//             </tr>`
-//             let btneliminar = document.getElementById(`${v.dmadera}-${v.dnucleo}`)
-//             btnDelete.push(btneliminar)
-//             btneliminar.addEventListener("click", deleteCanasta)
-// }
-
-// Quitar Productos del Carrito
-
-// const botonQuitar = document.querySelector("button.quitar")
-// const botonQuitar = document.querySelector('input[name="quitar"]:checked')
-// botonQuitar.addEventListener("click", deleteCanasta)
