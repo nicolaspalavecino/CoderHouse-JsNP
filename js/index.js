@@ -2,7 +2,6 @@
 const containerMadera = document.querySelector("#containerMadera")
 const containerNucleo = document.querySelector("#containerNucleo")
 
-// const btnVarita = document.querySelector("#btn-varita")
 // Selección de Varita
 const valorVarita = document.querySelector("#valorVarita")
 const nameMadera = document.querySelector("#nameMadera")
