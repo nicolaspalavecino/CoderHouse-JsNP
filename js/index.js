@@ -88,31 +88,6 @@ let presupuesto = ()=> {
         alertSeleccion.innerHTML = ""
 }
 
-// Alerta de adición del producto al carrito
-let alertaCanasta = (cmadera, cnucleo)=> {
-    Swal.fire({
-        width: 300,
-        position: 'center',
-        imageUrl: '../img/Botones/LogoCanasta.png',
-        imageHeight: 100,
-        text: 'La varita de ' + cmadera + ' y ' + cnucleo + ' fue añadida a su canasta.',
-        color: '#a98754',
-        showConfirmButton: false,
-        background: '#291024',
-        timer: 1500
-      })   
-}
-
-// Añadir producto al carrito // Movido hacia arriba (antes estaba abajo )
-let plusVarita = ()=> {
-    let valorFinal = (parseInt(cargarMadera().value)+(parseInt(cargarNucleo().value)))*valorFijo
-    let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal)
-    canastaDiagon.push(dvarita)
-    localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
-    canastaHTML()
-    alertaCanasta(cargarMadera().id, cargarNucleo().id)
-}
-
 // Presupuesto Varita ("Diseñar varita") // Función gatillada por BtnVarita
 let presupuestoVarita = ()=> {
     if (cargarDatos(cargarMadera().value, cargarNucleo().value)){
@@ -139,6 +114,31 @@ btnVarita.addEventListener("click", presupuestoVarita)
 //     }
 // }
 // recuperarCanasta()
+
+// Añadir producto al carrito // Movido hacia arriba (antes estaba abajo )
+let plusVarita = ()=> {
+    let valorFinal = (parseInt(cargarMadera().value)+(parseInt(cargarNucleo().value)))*valorFijo
+    let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal)
+    canastaDiagon.push(dvarita)
+    localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
+    canastaHTML()
+    alertaCanasta(cargarMadera().id, cargarNucleo().id)
+}
+
+// Alerta de adición del producto al carrito
+let alertaCanasta = (cmadera, cnucleo)=> {
+    Swal.fire({
+        width: 300,
+        position: 'center',
+        imageUrl: '../img/Botones/LogoCanasta.png',
+        imageHeight: 100,
+        text: 'La varita de ' + cmadera + ' y ' + cnucleo + ' fue añadida a su canasta.',
+        color: '#a98754',
+        showConfirmButton: false,
+        background: '#291024',
+        timer: 1500
+      })   
+}
 
 // Suma del Total del Carrito
 let sumaCanasta = ()=> {
