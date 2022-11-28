@@ -25,7 +25,7 @@ button.diseñar {
 }
 
 button.diseñar img, button.botonCanasta img {
-  height: 100px;
+  height: 65px;
   border-radius: 50%;
 }
 
@@ -72,14 +72,14 @@ p {
 }
 
 .resalt {
-  color: rgb(169, 135, 84);
+  color: #a98754;
   font-family: "Libre Baskerville", serif;
 }
 
 header {
   background-color: rgb(6, 11, 21);
   padding: 20px 0px 20px 0px;
-  border-bottom: 1px dashed rgb(169, 135, 84);
+  border-bottom: 1px dashed #a98754;
 }
 
 .logo {
@@ -116,7 +116,6 @@ footer p {
   color: white;
   position: relative;
   display: inline-block;
-  margin-bottom: 50px;
 }
 .seleccion img {
   width: 100%;
@@ -132,7 +131,7 @@ footer p {
   transform: translate(-50%, -50%);
   color: white;
 }
-.seleccion div h2 {
+.seleccion div h1 {
   font-family: "Libre Baskerville", serif;
   padding-left: 10px;
   font-size: 3rem;
@@ -140,6 +139,31 @@ footer p {
 .seleccion div p {
   padding-left: 10px;
   font-size: 1.5rem;
+}
+
+.modal-content {
+  background-color: #a98754;
+}
+.modal-content h2 {
+  font-family: "Libre Baskerville", serif;
+  color: white;
+}
+
+.pasos {
+  width: 100%;
+  background-color: rgba(0, 2, 10, 0.938);
+  color: #a98754;
+  font-weight: 100;
+  padding: 10px;
+  border-radius: 0.5rem;
+}
+.pasos h3 {
+  font-family: "Crimson Text", serif;
+  color: rgba(245, 245, 245, 0.76);
+  margin: 10px;
+}
+.pasos p {
+  margin: 10px;
 }
 
 .material {
@@ -150,8 +174,8 @@ footer p {
 
 .subLogo {
   display: flex;
-  border-bottom: 1px solid rgb(169, 135, 84);
-  border-top: 1px solid rgb(169, 135, 84);
+  border-bottom: 1px solid #a98754;
+  border-top: 1px solid #a98754;
   flex-direction: row;
   align-items: center;
   background-color: rgb(6, 11, 21);
@@ -182,8 +206,8 @@ footer p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgb(169, 135, 84);
-  color: rgb(169, 135, 84);
+  border: 1px solid #a98754;
+  color: #a98754;
   border-radius: 1rem;
   padding: 10px 10px 0px 10px;
 }
@@ -247,7 +271,7 @@ footer p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(41, 16, 36, 0.555);
+  background-color: rgba(41, 16, 36, 0.5568627451);
   padding: 20px 0px;
   margin-bottom: 20px;
 }

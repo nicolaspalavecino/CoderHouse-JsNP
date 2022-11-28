@@ -5,7 +5,6 @@
     color: white;
     position: relative;
     display: inline-block;
-    margin-bottom: 50px;
     img {
         width: 100%;
         height: 100%;
@@ -18,7 +17,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         color: white;
-        h2 {
+        h1 {
             font-family: 'Libre Baskerville', serif;
             padding-left: 10px;
             font-size: 3rem;
@@ -27,5 +26,30 @@
             padding-left: 10px;
             font-size: 1.5rem;
         }
+    }
+}
+
+.modal-content {
+    background-color: $hpdorado;
+    h2 {
+        font-family: 'Libre Baskerville', serif;
+        color: white;
+    }
+}
+
+.pasos{
+    width: 100%;
+    background-color: $hpdarker;
+    color: $hpdorado;
+    font-weight: 100;
+    padding: 10px;
+    border-radius: 0.5rem;
+    h3 {
+        font-family: 'Crimson Text', serif;
+        color: rgba(245, 245, 245, 0.76);
+        margin: 10px;
+    }
+    p {
+        margin: 10px;
     }
 }

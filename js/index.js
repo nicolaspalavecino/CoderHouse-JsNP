@@ -1,7 +1,23 @@
-// Mostrar Cards de Materiales
+// Cards de Materiales
 const containerMadera = document.querySelector("#containerMadera")
 const containerNucleo = document.querySelector("#containerNucleo")
 
+// const btnVarita = document.querySelector("#btn-varita")
+// Selección de Varita
+const valorVarita = document.querySelector("#valorVarita")
+const nameMadera = document.querySelector("#nameMadera")
+const nameNucleo = document.querySelector("#nameNucleo")
+const finVarita = document.querySelector("div.finVarita")
+// Interacción con Botón
+const btnVarita = document.querySelector("#btn-varita")
+
+// Canasta
+const agregar = document.getElementById("agregar")
+const canastaDiagon = []
+const btnDelete = []
+const totalCanasta = document.getElementById("totalCanasta")
+
+// Carga de Cards en Materiales
 let showCards = (contenido, array)=> {
     if (array.length > 0) {
         array.forEach(elemento => {
@@ -24,16 +40,7 @@ let showCards = (contenido, array)=> {
 showCards(containerMadera, maderas)
 showCards(containerNucleo, nucleos)
 
-// const btnVarita = document.querySelector("#btn-varita")
-const valorVarita = document.querySelector("#valorVarita")
-const nameMadera = document.querySelector("#nameMadera")
-const nameNucleo = document.querySelector("#nameNucleo")
-const finVarita = document.querySelector("div.finVarita")
-
-const agregar = document.getElementById("agregar")
-
-
-// Selección de Materiales - OPCIÓN 1 
+// Selección de Materiales
 let cargarMadera = ()=> {
     const selectMadera = document.querySelector('input[name="wood"]:checked')
         if (selectMadera == null){
@@ -82,7 +89,7 @@ let presupuesto = ()=> {
         alertSeleccion.innerHTML = ""
 }
 
-// Presupuesto Varita ("Diseñar varita")
+// Presupuesto Varita ("Diseñar varita") // Función gatillada por BtnVarita
 let presupuestoVarita = ()=> {
     if (cargarDatos(cargarMadera().value, cargarNucleo().value)){
         presupuesto()
@@ -99,26 +106,130 @@ let presupuestoVarita = ()=> {
         alert("Por favor, complete todos los datos necesarios.")
     }
 }
-
-// dom boton agegar
-
-
-// Interacción con Botón
-const btnVarita = document.querySelector("#btn-varita")
 btnVarita.addEventListener("click", presupuestoVarita)
 
+// let recuperarCanasta = ()=> {
+//     if (canastaDiagon === null) {
+//         localStorage.setItem("Canasta-Diagon", "")        
+//         canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
+//     }
+// }
+// recuperarCanasta()
+
+// Suma del Total del Carrito
+let sumaCanasta = ()=> {
+    const canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
+    let sumaTotal = 0
+    if (canastaDiagon.length > 0) {
+        canastaDiagon.forEach(v => {
+            sumaTotal += v.dvalor 
+        })
+    return sumaTotal
+    }
+}
+
 // Producto final y Carrito
-const canastaDiagon = []
+let canastaHTML = ()=> {
+    let tablaHTML = ""
+    const tbody = document.querySelector("tbody")
+    const canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
+    if (canastaDiagon.length > 0) {
+        canastaDiagon.forEach(v => {
+            tablaHTML +=
+            `<tr>
+                <td>Varita de ${v.dmadera} y ${v.dnucleo} </td>
+                <td>$${v.dvalor}</td>
+                <td class="del"><button class="quitar quitar2" id="${v.dmadera}-${v.dnucleo}"> X </button></td>
+            </tr>`   
+        })
+        tbody.innerHTML = tablaHTML
+        // let btneliminar = document.querySelectorAll("button.quitar.quitar2")
+        // console.table(btneliminar)
+        // btneliminar.forEach(btn => {
+        //     btn.addEventListener("click", deleteCanasta)
+        //     let btnx = btnDelete.some(x => x.id === btn.id)
+        //     if (btnx === false){
+        //         btnDelete.push(btn)
+        //     }
+        // })
+    totalCanasta.innerHTML = `<p>Total a pagar: $${sumaCanasta()}</p>`
+    }
+} 
+canastaHTML() // Ejecutando esta función se recupera lo del localStorage y se muestra en la tabla al recargar la página.
+
+// Añadir producto al carrito
 let plusVarita = ()=> {
     let valorFinal = (parseInt(cargarMadera().value)+(parseInt(cargarNucleo().value)))*valorFijo
     let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal)
     canastaDiagon.push(dvarita)
-    //
-    localStorage.setItem("Canasta Diagon", JSON.stringify(canastaDiagon))
-    console.clear
-    console.table(canastaDiagon)
+    localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
     canastaHTML()
+    alertaCanasta(cargarMadera().id, cargarNucleo().id)
 }
+
+// Alerta de adición del producto al carrito
+let alertaCanasta = (cmadera, cnucleo)=> {
+    Swal.fire({
+        width: 300,
+        position: 'center',
+        imageUrl: '../img/Botones/LogoCanasta.png',
+        imageHeight: 100,
+        text: 'La varita de ' + cmadera + ' y ' + cnucleo + ' fue añadida a su canasta.',
+        color: '#a98754',
+        showConfirmButton: false,
+        background: '#291024',
+        timer: 1500
+      })   
+}
+
+// ELIMINAR DEL CARRITO
+const btneliminar = document.querySelectorAll('button.quitar.quitar2') //Al crearse se agrega al localStorage pero al verlo en la consola no muestra el array actualizado. Solamente se ve cuando se recarga la página.
+
+
+// console.table(btneliminar)
+// btneliminar.forEach(btn => {
+//     btn.addEventListener("click", deleteCanasta)
+//     let btnx = btnDelete.some(x => x.id === btn.id)
+//     if (btnx === false){
+//         btnDelete.push(btn)
+//     }
+// })
+
+// let deleteCanasta = ()=> {
+//     btnDelete.forEach(btn => { 
+//         btn.addEventListener("click", ()=> {
+//             // let indicex = canastaDiagon.findIndex((y)=> y.id === btn.id) // Asignarle al indicex el valor del index del y cuyo id coincida con eliminado.
+//             // canastaDiagon.splice(indicex,1)
+//         console.log(btn.id)
+//         })
+//     })
+// }
+
+
+// EJEMPLO DE LA CLASE
+// function activarClickBotones() {
+//     botonesAdd.forEach(btn => {
+//         btn.addEventListener("click", ()=> {
+//             let resultado = productos.find(prod => prod.id === parseInt(btn.id))
+//                 carrito.push(resultado)
+//                 localStorage.setItem("miCarrito", JSON.stringify(carrito))
+//         })
+//     })
+// }
+// activarClickBotones()
+
+// function activarClickBotones() {
+//     const buttonsDelete = document.querySelectorAll("button.button-add")
+//     buttonsDelete.forEach(btn => {
+//         btn.addEventListener("click", ()=> {
+//             //buscar usando button.id el producto en el array carrito.
+//             //hay que utilizar findIndex() porque necesitamos el índice del producto
+//             //luego con el método splice(), elimino el índice recuperado del carrito.
+//             //debemos declarar carrito de forma GLOBAL.
+//         })
+//     })
+// }
+
 
 // let addwand = document.getElementById("addVarita")
 // addwand.addEventListener("click", plusVarita) // plusVarita() -> Ejecuta directamente la función (???)
@@ -135,66 +246,8 @@ let plusVarita = ()=> {
 //             btneliminar.addEventListener("click", deleteCanasta)
 // }
 
-
-let canastaHTML = ()=> {
-    let tablaHTML = ""
-    const tbody = document.querySelector("tbody")
-    const canastaDiagon = JSON.parse(localStorage.getItem("Canasta Diagon"))
-    if (canastaDiagon.length > 0) {
-        canastaDiagon.forEach(v => {
-            // tablaHTML += tablaCarrito(v)
-            tablaHTML +=
-            `<tr>
-                <td>Varita de ${v.dmadera} y ${v.dnucleo} </td>
-                <td>$${v.dvalor}</td>
-                <td class="del"><button class="quitar quitar2" id="${v.dmadera}-${v.dnucleo}"> X </button></td>
-            </tr>`   
-        })
-        tbody.innerHTML = tablaHTML
-        let btneliminar = document.querySelectorAll("button.quitar.quitar2")
-        console.table(btneliminar)
-        // debugger
-        btneliminar.forEach(btn => {
-            btn.addEventListener("click", deleteCanasta)
-            let btnx = btnDelete.some(x => x.id === btn.id)
-            if (btnx === false){
-                btnDelete.push(btn)
-            }
-        })
-    totalCanasta.innerHTML = `<p>Total a pagar: $${sumaCanasta()}</p>`
-    }
-} // Funciona bien
-
-
-// Suma del Total del Carrito
-const totalCanasta = document.getElementById("totalCanasta")
-
-let sumaCanasta = ()=> {
-    let sumaTotal = 0
-    if (canastaDiagon.length > 0) {
-        canastaDiagon.forEach(v => {
-            sumaTotal += v.dvalor 
-        })
-    return sumaTotal
-    }
-}
-
-
 // Quitar Productos del Carrito
 
 // const botonQuitar = document.querySelector("button.quitar")
 // const botonQuitar = document.querySelector('input[name="quitar"]:checked')
 // botonQuitar.addEventListener("click", deleteCanasta)
-
-const btnDelete = []
-
-let deleteCanasta = ()=> {
-    debugger
-    btnDelete.forEach(btn => { 
-        btn.addEventListener("click", ()=> {
-        //     let indicex = canastaDiagon.findIndex((y)=> y.id === btn.id) // Asignarle al indicex el valor del index del y cuyo id coincida con eliminado.
-        //     canastaDiagon.splice(indicex,1)
-        console.log(btn.id)
-        })
-    })
-}
