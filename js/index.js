@@ -88,7 +88,22 @@ let presupuesto = ()=> {
         alertSeleccion.innerHTML = ""
 }
 
-// Añadir producto al carrito // Movido hacia arriba (antes estaba abajo)
+// Alerta de adición del producto al carrito
+let alertaCanasta = (cmadera, cnucleo)=> {
+    Swal.fire({
+        width: 300,
+        position: 'center',
+        imageUrl: '../img/Botones/LogoCanasta.png',
+        imageHeight: 100,
+        text: 'La varita de ' + cmadera + ' y ' + cnucleo + ' fue añadida a su canasta.',
+        color: '#a98754',
+        showConfirmButton: false,
+        background: '#291024',
+        timer: 1500
+      })   
+}
+
+// Añadir producto al carrito // Movido hacia arriba (antes estaba abajo )
 let plusVarita = ()=> {
     let valorFinal = (parseInt(cargarMadera().value)+(parseInt(cargarNucleo().value)))*valorFijo
     let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal)
@@ -166,22 +181,6 @@ let canastaHTML = ()=> {
 } 
 canastaHTML() // Ejecutando esta función se recupera lo del localStorage y se muestra en la tabla al recargar la página.
 
-
-
-// Alerta de adición del producto al carrito
-let alertaCanasta = (cmadera, cnucleo)=> {
-    Swal.fire({
-        width: 300,
-        position: 'center',
-        imageUrl: '../img/Botones/LogoCanasta.png',
-        imageHeight: 100,
-        text: 'La varita de ' + cmadera + ' y ' + cnucleo + ' fue añadida a su canasta.',
-        color: '#a98754',
-        showConfirmButton: false,
-        background: '#291024',
-        timer: 1500
-      })   
-}
 
 // ELIMINAR DEL CARRITO
 const btneliminar = document.querySelectorAll('button.quitar.quitar2') //Al crearse se agrega al localStorage pero al verlo en la consola no muestra el array actualizado. Solamente se ve cuando se recarga la página.
