@@ -10,10 +10,15 @@ class Varita {
     }
 }
 
+let randomCode = ()=>{
+    return parseInt(Math.random()*1000000)
+}
+
 class VaritaDiseñada {
-    constructor(dmadera, dnucleo, dvalor) {
+    constructor(dmadera, dnucleo, dvalor, id) {
         this.dmadera = dmadera
         this.dnucleo = dnucleo
         this.dvalor = parseInt(dvalor)
+        this.id = id
     }
 }

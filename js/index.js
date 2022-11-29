@@ -13,7 +13,15 @@ const btnVarita = document.querySelector("#btn-varita")
 
 // Canasta
 const agregar = document.getElementById("agregar")
-const canastaDiagon = []
+let canastaDiagon = []
+
+let llamarStorage = ()=> {
+    if (localStorage.length !== 0){
+        canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
+    }
+}
+llamarStorage()
+// localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
 const totalCanasta = document.getElementById("totalCanasta")
 
 // Carga de Cards en Materiales
@@ -110,10 +118,11 @@ btnVarita.addEventListener("click", presupuestoVarita)
 // Añadir producto al carrito // Movido hacia arriba (antes estaba abajo )
 let plusVarita = ()=> {
     let valorFinal = (parseInt(cargarMadera().value)+(parseInt(cargarNucleo().value)))*valorFijo
-    let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal)
+    let dvarita = new VaritaDiseñada(cargarMadera().id, cargarNucleo().id, valorFinal, randomCode())
     canastaDiagon.push(dvarita)
     localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
     canastaHTML()
+    buttonDelete()
     alertaCanasta(cargarMadera().id, cargarNucleo().id)
 }
 
@@ -134,7 +143,7 @@ let alertaCanasta = (cmadera, cnucleo)=> {
 
 // Suma del Total del Carrito
 let sumaCanasta = ()=> {
-    const canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
+    let canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
     let sumaTotal = 0
     if (canastaDiagon.length > 0) {
         canastaDiagon.forEach(v => {
@@ -144,23 +153,42 @@ let sumaCanasta = ()=> {
     }
 }
 
+let btnEliminar = document.querySelectorAll("button.quitar.quitar2")
+
 // Producto final y Carrito
 let canastaHTML = ()=> {
-    let tablaHTML = ""
-    const tbody = document.querySelector("tbody")
-    const canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
-    if (canastaDiagon.length > 0) {
+    if (canastaDiagon.length > 0){
+        let tablaHTML = ""
+        const tbody = document.querySelector("tbody")
+        let canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
         canastaDiagon.forEach(v => {
             tablaHTML +=
             `<tr>
                 <td>Varita de ${v.dmadera} y ${v.dnucleo}</td>
                 <td>$${v.dvalor}</td>
-                <td class="del"><button class="quitar quitar2" id="${v.dmadera}${v.dnucleo}"> X </button></td>
-            </tr>`
+                <td class="del"><button class="quitar quitar2" id="${v.id}"> X </button></td>
+            </tr>`      
         })
         tbody.innerHTML = tablaHTML
         totalCanasta.innerHTML = `<p>Total a pagar: $${sumaCanasta()}</p>`
+        btnEliminar = document.querySelectorAll("button.quitar.quitar2")
     }
 }
 canastaHTML() // Ejecutando esta función se recupera lo del localStorage y se muestra en la tabla al recargar la página.
+
+
+// Botones ELIMINAR del carrito // No funciona correctamente (requiere recargar la página porque solo deja eliminar una vez)
+let buttonDelete = ()=> {
+    btnEliminar.forEach(btn => {
+        btn.addEventListener("click", ()=>{
+            let encontrado = canastaDiagon.findIndex(diseño => diseño.id === parseInt(btn.id))
+            canastaDiagon.splice(encontrado,1)
+            localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
+            canastaHTML()
+            // btnEliminar.forEach(x => {x.addEventListener("click", a)})
+        })
+    })
+    btnEliminar.forEach(btn => {console.log(btn.id)})
+}
+buttonDelete()
 
