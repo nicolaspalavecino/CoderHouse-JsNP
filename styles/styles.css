@@ -244,8 +244,8 @@ footer p {
 }
 
 .inn:checked + .tarjeta {
-  box-shadow: 0 0 8px 1px #484e4a;
-  background-color: rgb(6, 11, 21);
+  box-shadow: 0 0 10px 1px #636965;
+  background-color: rgb(9, 16, 31);
 }
 
 .inn:checked + .tarjeta h4, .inn:checked + .tarjeta p.costo {

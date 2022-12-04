@@ -7,6 +7,7 @@ const valorVarita = document.querySelector("#valorVarita")
 const nameMadera = document.querySelector("#nameMadera")
 const nameNucleo = document.querySelector("#nameNucleo")
 const finVarita = document.querySelector("div.finVarita")
+const alertSeleccion = document.getElementById('alertSeleccion')
 
 // Interacción con Botón
 const btnVarita = document.querySelector("#btn-varita")
@@ -67,9 +68,7 @@ let cargarNucleo = ()=> {
 }
 
 // Alerta de NO selección
-const alertSeleccion = document.getElementById('alertSeleccion')
-
-const alert = (message) => {
+let alert = (message) => {
     alertSeleccion.innerHTML =
             `<div class="alertas">
                <div>${message}</div>
@@ -134,7 +133,7 @@ let presupuestoVarita = ()=> {
 }
 btnVarita.addEventListener("click", presupuestoVarita)
 
-// Añadir producto al carrito // Movido hacia arriba (antes estaba abajo )
+// Añadir producto al carrito 
 let plusVarita = ()=> {
     canastaDiagon.push(presupuesto())
     localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
@@ -191,7 +190,7 @@ let canastaHTML = ()=> {
         btnEliminar = document.querySelectorAll("button.quitar.quitar2")
     }
 }
-canastaHTML() // Ejecutando esta función se recupera lo del localStorage y se muestra en la tabla al recargar la página.
+canastaHTML() 
 
 // Botones ELIMINAR del carrito 
 let buttonDelete = ()=> {
