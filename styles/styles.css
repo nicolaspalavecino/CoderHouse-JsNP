@@ -244,7 +244,7 @@ footer p {
 }
 
 .inn:checked + .tarjeta {
-  box-shadow: 0 0 10px 1px #636965;
+  box-shadow: 0 0 20px 1px #636965;
   background-color: rgb(9, 16, 31);
 }
 

@@ -126,7 +126,7 @@ let presupuestoVarita = ()=> {
             </button>`
             let addwand = document.getElementById("addVarita")
             addwand.addEventListener("click", plusVarita)
-        }, 5000)
+        }, 3500)
     } else {
         alert("Por favor, complete todos los datos necesarios.")
     }
