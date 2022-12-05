@@ -8,6 +8,7 @@ const nameMadera = document.querySelector("#nameMadera")
 const nameNucleo = document.querySelector("#nameNucleo")
 const finVarita = document.querySelector("div.finVarita")
 const alertSeleccion = document.getElementById('alertSeleccion')
+const valorFijo = 1.25
 
 // Interacción con Botón
 const btnVarita = document.querySelector("#btn-varita")
@@ -16,6 +17,23 @@ const btnVarita = document.querySelector("#btn-varita")
 const agregar = document.getElementById("agregar")
 let canastaDiagon = []
 const totalCanasta = document.getElementById("totalCanasta")
+
+// Conexión con JSON
+const URLmaderas = "./Json/maderas.json"
+const URLnucleos = "./Json/nucleos.json"
+const maderas = []
+const nucleos = []
+
+fetch(URLmaderas)
+    .then((response)=> data = response.json())
+    .then((data)=> maderas.push(...data))
+    .then(()=> showCards(containerMadera, maderas))
+
+fetch(URLnucleos)
+    .then((response)=> data = response.json())
+    .then((data)=> nucleos.push(...data))
+    .then(()=> showCards(containerNucleo, nucleos))
+
 
 // Llamar a localStorage
 let llamarStorage = ()=> {
@@ -45,8 +63,6 @@ let showCards = (contenido, array)=> {
         )
     }
 }
-showCards(containerMadera, maderas)
-showCards(containerNucleo, nucleos)
 
 // Selección de Materiales
 let cargarMadera = ()=> {
