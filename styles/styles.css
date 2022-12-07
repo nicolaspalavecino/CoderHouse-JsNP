@@ -44,13 +44,11 @@ button.btn-addcanasta {
   display: inline-block;
   text-align: center;
 }
-
-.btn-addcanasta img {
+button.btn-addcanasta img {
   height: 70px;
   position: relative;
 }
-
-.btn-addcanasta p {
+button.btn-addcanasta p {
   font-family: "Crimson Text", serif;
   font-size: 18px;
   font-weight: bold;
@@ -58,6 +56,25 @@ button.btn-addcanasta {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+button#btnComprar {
+  height: 42px;
+  margin-top: 10px;
+}
+button#btnComprar img {
+  height: 38px;
+}
+button#btnComprar p {
+  font-size: 13px;
+}
+
+button.swal2-confirm.swal2-styled {
+  background-color: #a98754;
+}
+
+button.swal2-cancel.swal2-styled {
+  background-color: #836840;
 }
 
 * {
@@ -314,4 +331,10 @@ table td {
 }
 table td.del {
   text-align: center;
+}
+
+.swal2-input {
+  width: 10em;
+  max-width: 100%;
+  margin: 0.25em;
 }/*# sourceMappingURL=styles.css.map */

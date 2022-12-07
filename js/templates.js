@@ -41,9 +41,9 @@ modalcarrito.innerHTML =
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Aquí</td>
-                                            <td>verás</td>
-                                            <td>productos</td>
+                                            <td>No hay productos en su Canasta</td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>

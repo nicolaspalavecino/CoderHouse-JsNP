@@ -41,19 +41,36 @@ button.btn-addcanasta {
     position: relative;
     display: inline-block;
     text-align: center;
+    img{
+        height: 70px;
+        position: relative;
+    }
+    p {
+        font-family: 'Crimson Text', serif;
+        font-size: 18px;
+        font-weight: bold;    
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
-.btn-addcanasta img{
-    height: 70px;
-    position: relative;
+button#btnComprar {
+    height: 42px;
+    margin-top: 10px;
+    img {
+        height: 38px;
+    }
+    p {
+        font-size: 13px;
+    }
 }
 
-.btn-addcanasta p {
-    font-family: 'Crimson Text', serif;
-    font-size: 18px;
-    font-weight: bold;    
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+button.swal2-confirm.swal2-styled {
+    background-color: $hpdorado;
+}
+
+button.swal2-cancel.swal2-styled {
+    background-color: $hpdoradoplus;
 }

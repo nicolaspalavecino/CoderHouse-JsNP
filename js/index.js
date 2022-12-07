@@ -18,6 +18,9 @@ const agregar = document.getElementById("agregar")
 let canastaDiagon = []
 const totalCanasta = document.getElementById("totalCanasta")
 
+//Compra de producto
+let buy = document.querySelector("#buy")
+
 // Conexión con JSON
 const URLmaderas = "./Json/maderas.json"
 const URLnucleos = "./Json/nucleos.json"
@@ -169,7 +172,7 @@ let alertaCanasta = (cmadera, cnucleo)=> {
         color: '#a98754',
         showConfirmButton: false,
         background: '#291024',
-        timer: 1800
+        // timer: 1800
       })
 }
 
@@ -185,7 +188,65 @@ let sumaCanasta = ()=> {
     }
 }
 
+// Declaración de array de botones eliminar
 let btnEliminar = document.querySelectorAll("button.quitar.quitar2")
+
+// Formulario de Compra
+let comprar = () => {
+    if (canastaDiagon.length > 0){
+        Swal.fire({
+            color: '#a98754',
+            background: '#291024',
+            imageUrl: '../img/gringotts.png',
+            imageHeight: 100,
+            title: 'Total a pagar: $' + sumaCanasta(),
+            html:
+            '<p>Complete los siguientes datos para finalizar:</p>' +
+            '<input placeholder="Nombre" id="swal-input1" class="swal2-input">' +
+            '<input placeholder="Apellido" id="swal-input2" class="swal2-input">' +
+            '<input placeholder="Email" id="swal-input3" class="swal2-input">' +
+            '<input placeholder="Telefono" id="swal-input4" class="swal2-input">' +
+            '<input placeholder="Dirección" id="swal-input5" class="swal2-input">' +
+            '<input placeholder="Código postal" id="swal-input6" class="swal2-input">' +
+            '<select id="swal-input7" class="swal2-input">' +
+                '<option value="" hidden>Medio de pago</option>' +
+                '<option value="credito">Tarjeta de crédito</option>' +
+                '<option value="debito">Tarjeta de débito</option>' +
+                '<option value="efectivo">Pago en efectivo</option>' +
+            '</select>',
+            showConfirmButton: true,
+            confirmButtonText: "Confirmar",
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+        }) .then ((result)=>{       
+            if (result.isConfirmed) {
+                let nombre = document.getElementById('swal-input1').value.trim().toUpperCase()
+                let apellido = document.getElementById('swal-input2').value.trim().toUpperCase()
+                let mail = document.getElementById('swal-input3').value.trim()
+                let telefono = document.getElementById('swal-input4').value.trim()
+                let direccion = document.getElementById('swal-input5').value.trim()
+                let codigoPostal = document.getElementById('swal-input6').value.trim()
+                let medioPago = document.getElementById('swal-input7').value
+                if (nombre === "" || apellido === "" || mail === "" || telefono === "" || direccion === "" || codigoPostal === "" || medioPago === "") {
+                    Swal.fire("Rellene todos los campos por favor", "", "error")
+                    setTimeout( () => {
+                        comprar()
+                        return
+                    },2000)
+                } else {
+                let compra = [nombre, apellido, mail, telefono, direccion, codigoPostal, medioPago]
+                localStorage.setItem(nombre, JSON.stringify(compra))
+                console.log(compra)
+                Swal.fire("Gracias por comprar en nuestra tienda", "", "success")
+                localStorage.clear("Canasta Diagon")
+                location.reload()
+                }
+            } else if (result.isDismissed) {
+                Swal.fire("La operación fue cancelada", "", "warning")
+            }
+        });
+    }
+}
 
 // Producto final y Carrito
 let canastaHTML = ()=> {
@@ -199,7 +260,16 @@ let canastaHTML = ()=> {
                 <td>Varita de ${v.madera} y ${v.nucleo}</td>
                 <td>$${v.valor}</td>
                 <td class="del"><button class="quitar quitar2" id="${v.id}"> X </button></td>
-            </tr>`      
+            </tr>`
+            buy.innerHTML = 
+            `<button class="btn-addcanasta" id="btnComprar">
+                <div>
+                    <img src="./img/Botones/btnbg.png">
+                    <p>COMPRAR</p>
+                </div>
+            </button>`
+            let btnComprar = document.getElementById("btnComprar")
+            btnComprar.addEventListener("click", comprar)
         })
         tbody.innerHTML = tablaHTML
         totalCanasta.innerHTML = `<p>Total a pagar: $${sumaCanasta()}</p>`
@@ -221,3 +291,5 @@ let buttonDelete = ()=> {
     })
 }
 buttonDelete()
+
+
