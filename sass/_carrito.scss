@@ -36,4 +36,24 @@ table{
     margin: 0.25em;
 }
 
+.swal2-modal {
+    width: 300px;
+    position: center;
+    color: $hpdorado;
+    background-color: $hplightsolid;
+    img {
+        height: 150px;
+    }
+}
+
+.forms {
+    img {
+        height: 100px;
+    }
+    @media (min-width: 768px){
+        width: 512px;
+    }
+}
+
+
 

@@ -164,15 +164,9 @@ let plusVarita = ()=> {
 // Alerta de adición del producto al carrito
 let alertaCanasta = (cmadera, cnucleo)=> {
     Swal.fire({
-        width: 300,
-        position: 'center',
         imageUrl: '../img/Botones/LogoCanasta.png',
-        imageHeight: 100,
         text: 'La varita de ' + cmadera + ' y ' + cnucleo + ' fue añadida a su canasta.',
-        color: '#a98754',
         showConfirmButton: false,
-        background: '#291024',
-        // timer: 1800
       })
 }
 
@@ -195,10 +189,8 @@ let btnEliminar = document.querySelectorAll("button.quitar.quitar2")
 let comprar = () => {
     if (canastaDiagon.length > 0){
         Swal.fire({
-            color: '#a98754',
-            background: '#291024',
+            customClass: {popup:"forms"},
             imageUrl: '../img/gringotts.png',
-            imageHeight: 100,
             title: 'Total a pagar: $' + sumaCanasta(),
             html:
             '<p>Complete los siguientes datos para finalizar:</p>' +
@@ -228,21 +220,34 @@ let comprar = () => {
                 let codigoPostal = document.getElementById('swal-input6').value.trim()
                 let medioPago = document.getElementById('swal-input7').value
                 if (nombre === "" || apellido === "" || mail === "" || telefono === "" || direccion === "" || codigoPostal === "" || medioPago === "") {
-                    Swal.fire("Rellene todos los campos por favor", "", "error")
+                    Swal.fire({
+                        imageUrl: '../img/LogoCruz.gif',
+                        text: 'Por favor, rellene todos los campos.',
+                        showConfirmButton: false,
+                    })
                     setTimeout( () => {
                         comprar()
                         return
-                    },2000)
+                    },3000)
                 } else {
-                let compra = [nombre, apellido, mail, telefono, direccion, codigoPostal, medioPago]
-                localStorage.setItem(nombre, JSON.stringify(compra))
-                console.log(compra)
-                Swal.fire("Gracias por comprar en nuestra tienda", "", "success")
-                localStorage.clear("Canasta Diagon")
-                location.reload()
+                    let compra = [nombre, apellido, mail, telefono, direccion, codigoPostal, medioPago]
+                    localStorage.setItem(nombre, JSON.stringify(compra))
+                    Swal.fire({
+                        imageUrl: '../img/LogoCheck.gif',
+                        text: '¡Gracias por comprar en nuestra Tienda!',
+                        showConfirmButton: false,
+                    })
+                    setTimeout( ()=> {
+                        localStorage.clear("Canasta Diagon")
+                        location.reload()
+                    },5000)
                 }
             } else if (result.isDismissed) {
-                Swal.fire("La operación fue cancelada", "", "warning")
+                Swal.fire({
+                    imageUrl: '../img/LogoAlert.gif',
+                    text: 'La operación fue cancelada',
+                    showConfirmButton: false,
+                })
             }
         });
     }

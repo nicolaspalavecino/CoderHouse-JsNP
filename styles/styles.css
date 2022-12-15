@@ -337,4 +337,23 @@ table td.del {
   width: 10em;
   max-width: 100%;
   margin: 0.25em;
+}
+
+.swal2-modal {
+  width: 300px;
+  position: center;
+  color: #a98754;
+  background-color: #291024;
+}
+.swal2-modal img {
+  height: 150px;
+}
+
+.forms img {
+  height: 100px;
+}
+@media (min-width: 768px) {
+  .forms {
+    width: 512px;
+  }
 }/*# sourceMappingURL=styles.css.map */
