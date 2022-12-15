@@ -15,7 +15,7 @@ const btnVarita = document.querySelector("#btn-varita")
 
 // Canasta
 const agregar = document.getElementById("agregar")
-let canastaDiagon = []
+const canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon")) || []
 const totalCanasta = document.getElementById("totalCanasta")
 
 //Compra de producto
@@ -36,15 +36,6 @@ fetch(URLnucleos)
     .then((response)=> data = response.json())
     .then((data)=> nucleos.push(...data))
     .then(()=> showCards(containerNucleo, nucleos))
-
-
-// Llamar a localStorage
-let llamarStorage = ()=> {
-    if (localStorage.length !== 0){
-        canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
-    }
-}
-llamarStorage()
 
 // Carga de Cards en Materiales
 let showCards = (contenido, array)=> {
@@ -234,13 +225,13 @@ let comprar = () => {
                     localStorage.setItem(nombre, JSON.stringify(compra))
                     Swal.fire({
                         imageUrl: '../img/LogoCheck.gif',
-                        text: '¡Gracias por comprar en nuestra Tienda!',
+                        text: ' Su pedido está en camino ¡Gracias por comprar en nuestra Tienda!',
                         showConfirmButton: false,
                     })
                     setTimeout( ()=> {
                         localStorage.clear("Canasta Diagon")
                         location.reload()
-                    },5000)
+                    },6500)
                 }
             } else if (result.isDismissed) {
                 Swal.fire({
