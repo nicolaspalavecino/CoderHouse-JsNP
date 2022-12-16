@@ -1,27 +1,14 @@
-// Cards de Materiales
 const containerMadera = document.querySelector("#containerMadera")
 const containerNucleo = document.querySelector("#containerNucleo")
-
-// Selección de Varita
 const valorVarita = document.querySelector("#valorVarita")
-const nameMadera = document.querySelector("#nameMadera")
-const nameNucleo = document.querySelector("#nameNucleo")
 const finVarita = document.querySelector("div.finVarita")
 const alertSeleccion = document.getElementById('alertSeleccion')
 const valorFijo = 1.25
-
-// Interacción con Botón
 const btnVarita = document.querySelector("#btn-varita")
-
-// Canasta
 const agregar = document.getElementById("agregar")
 const canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon")) || []
 const totalCanasta = document.getElementById("totalCanasta")
-
-//Compra de producto
 let buy = document.querySelector("#buy")
-
-// Conexión con JSON
 const URLmaderas = "./Json/maderas.json"
 const URLnucleos = "./Json/nucleos.json"
 const maderas = []
@@ -37,7 +24,6 @@ fetch(URLnucleos)
     .then((data)=> nucleos.push(...data))
     .then(()=> showCards(containerNucleo, nucleos))
 
-// Carga de Cards en Materiales
 let showCards = (contenido, array)=> {
     if (array.length > 0) {
         array.forEach(elemento => {
@@ -58,11 +44,11 @@ let showCards = (contenido, array)=> {
     }
 }
 
-// Selección de Materiales
 let cargarMadera = ()=> {
     const selectMadera = document.querySelector('input[name="wood"]:checked')
         if (selectMadera == null){
-            return alert("Usted no ha seleccionado un tipo de Madera del catálogo.")
+            alert("No se ha seleccionado un tipo de Madera del catálogo.")
+            return selectMadera     
         } else if (selectMadera !== null){
             return selectMadera
         }
@@ -71,44 +57,33 @@ let cargarMadera = ()=> {
 let cargarNucleo = ()=> {
     const selectNucleo = document.querySelector('input[name="nucleus"]:checked')
         if (selectNucleo == null){
-            return alert("Usted no ha seleccionado un tipo de Núcleo del catálogo.")
+            alert("No se ha seleccionado un tipo de Núcleo del catálogo.")
+            return selectNucleo
         } else if (selectNucleo !== null){
             return selectNucleo
         }
 }
 
-// Alerta de NO selección
 let alert = (message) => {
     alertSeleccion.innerHTML =
             `<div class="alertas">
-               <div>${message}</div>
+                <p>${message}</p>
+                <p>Por favor, vuelva a intentarlo.</p>
             </div>`
     setTimeout(()=> {
            alertSeleccion.innerHTML = ""     
     }, 3000)
 }
 
-// Código random para los productos
 let randomCode = ()=>{
     return parseInt(Math.random()*1000000)
 }
 
-// Cotización de Varita
 let prVarita = () => {
     let resultado = ((parseInt(cargarMadera().value) + parseInt(cargarNucleo().value)) * valorFijo).toFixed(0)
         return resultado
 }
 
-// Verificar Carga de Datos
-let cargarDatos = (madera, nucleo)=> {
-    if (madera > 0 && nucleo > 0){
-        return true
-    } else {
-        return false
-    }
-}
-
-// Instanciar Cotización de Varita
 let presupuesto = ()=> {
     let wand = new Varitas(cargarMadera().id, cargarMadera().value, cargarNucleo().id, cargarNucleo().value, randomCode(), prVarita())
         finVarita.innerHTML =
@@ -120,9 +95,8 @@ let presupuesto = ()=> {
         return wand
 }
 
-// Presupuesto Varita ("Diseñar varita") // Función gatillada por BtnVarita
 let presupuestoVarita = ()=> {
-    if (cargarDatos(cargarMadera().value, cargarNucleo().value)){
+    if (cargarMadera() && cargarNucleo()) {
         btnVarita.innerHTML = `<img src="./img/caldero-loading.gif">`
         setTimeout(()=>  {
             presupuesto()
@@ -137,13 +111,10 @@ let presupuestoVarita = ()=> {
             let addwand = document.getElementById("addVarita")
             addwand.addEventListener("click", plusVarita)
         }, 3500)
-    } else {
-        alert("Por favor, complete todos los datos necesarios.")
     }
 }
 btnVarita.addEventListener("click", presupuestoVarita)
 
-// Añadir producto al carrito 
 let plusVarita = ()=> {
     canastaDiagon.push(presupuesto())
     localStorage.setItem("Canasta-Diagon", JSON.stringify(canastaDiagon))
@@ -152,7 +123,6 @@ let plusVarita = ()=> {
     alertaCanasta(cargarMadera().id, cargarNucleo().id)
 }
 
-// Alerta de adición del producto al carrito
 let alertaCanasta = (cmadera, cnucleo)=> {
     Swal.fire({
         imageUrl: '../img/Botones/LogoCanasta.png',
@@ -161,7 +131,6 @@ let alertaCanasta = (cmadera, cnucleo)=> {
       })
 }
 
-// Suma del Total del Carrito
 let sumaCanasta = ()=> {
     let canastaDiagon = JSON.parse(localStorage.getItem("Canasta-Diagon"))
     let sumaTotal = 0
@@ -173,10 +142,8 @@ let sumaCanasta = ()=> {
     }
 }
 
-// Declaración de array de botones eliminar
 let btnEliminar = document.querySelectorAll("button.quitar.quitar2")
 
-// Formulario de Compra
 let comprar = () => {
     if (canastaDiagon.length > 0){
         Swal.fire({
@@ -244,7 +211,6 @@ let comprar = () => {
     }
 }
 
-// Producto final y Carrito
 let canastaHTML = ()=> {
     if (canastaDiagon.length > 0){
         let tablaHTML = ""
@@ -274,7 +240,6 @@ let canastaHTML = ()=> {
 }
 canastaHTML() 
 
-// Botones ELIMINAR del carrito 
 let buttonDelete = ()=> {
     btnEliminar.forEach(btn => {
         btn.addEventListener("click", ()=>{
